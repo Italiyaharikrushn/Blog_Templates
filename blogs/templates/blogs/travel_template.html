@@ -118,6 +118,7 @@
             {% for travel in travels %}
             <div class="post">
                 <img src="{% static 'profile_images/img02.jpg' %}" alt="{{ travel.title }}">
+                <!-- <img src="{{ travel.image_url.url }}" alt="{{ travel.title }}"> -->
                 <div class="post-content">
                     <h2>{{ travel.title }}</h2>
                     <p>{{ travel.description }}</p>

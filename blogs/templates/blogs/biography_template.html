@@ -128,7 +128,8 @@
         <div class="container">
             {% for bio in biographies %}
             <div class="profile">
-                <img src="{{ bio.profile_img.url }}" alt="{{ bio.name }}">
+                <img src="{% static bio.profile_img %}" alt="{{ bio.name }}">
+                <!-- <img src="{{ bio.profile_img.url }}" alt="{{ bio.name }}"> -->
                 <h2>{{ bio.name }}</h2>
                 <p>{{ bio.bio }}</p>
                 <ul class="social-links">

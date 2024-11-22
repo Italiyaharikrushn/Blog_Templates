@@ -1,0 +1,118 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Self View</title>
+
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* Container for the whole content */
+        div {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        /* Style for each "myself" item */
+        .myself-item {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Style for video */
+        video {
+            width: 100%;
+            max-width: 320px;
+            display: block;
+            margin: 0 auto;
+            border-radius: 8px;
+        }
+
+        /* Title */
+        .myself-item h2 {
+            font-size: 24px;
+            color: #2c3e50;
+            margin-top: 10px;
+        }
+
+        /* Description */
+        .myself-item p {
+            color: #7f8c8d;
+            font-size: 16px;
+        }
+
+        /* Link */
+        .myself-item a {
+            display: inline-block;
+            margin-top: 10px;
+            color: #2980b9;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .myself-item a:hover {
+            text-decoration: underline;
+        }
+
+        /* Created At */
+        .myself-item p:last-of-type {
+            color: #95a5a6;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        /* Empty State */
+        p {
+            text-align: center;
+            font-size: 18px;
+            color: #e74c3c;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>About Me</h1>
+    <div>
+        {% for item in myself %}
+        <div class="myself-item">
+            <!-- {% if item.video %} -->
+            <video width="320" height="240" controls autoplay>
+                <source src="{% static item.video %}" type="video/mp4">
+                <!-- <source src="{{ item.video.url }}" type="video/mp4"> -->
+                Your browser does not support the video tag.
+            </video>
+            <!-- {% endif %} -->
+            <h2>{{ item.title }}</h2>
+            <p>{{ item.description }}</p>
+            {% if item.read_more_link %}
+            <a href="{{ item.read_more_link }}" target="_blank">Read More</a>
+            {% endif %}
+            <p>Created At: {{ item.created_at }}</p>
+        </div>
+        {% empty %}
+        <p>No information available.</p>
+        {% endfor %}
+    </div>
+</body>
+
+</html>

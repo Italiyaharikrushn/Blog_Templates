@@ -1,0 +1,126 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Posts</title>
+    <style>
+        /* Global styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        /* Post list styles */
+        .post-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .post-item {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+            width: 100%;
+            max-width: 300px;
+            box-sizing: border-box;
+            transition: transform 0.3s ease;
+        }
+
+        .post-item:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Image styling */
+        .post-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+        /* Title and description styles */
+        h2 {
+            font-size: 1.8em;
+            margin: 0 0 10px;
+            color: #007BFF;
+        }
+
+        p {
+            font-size: 1em;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        /* Read More link */
+        .read-more {
+            font-size: 1em;
+            color: #007BFF;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .read-more:hover {
+            text-decoration: underline;
+        }
+
+        /* Empty state styles */
+        p.no-posts {
+            text-align: center;
+            font-size: 1.2em;
+            color: #888;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Blog Post Pages</h1>
+        <div class="post-list">
+            {% for post in post_pages %}
+            <div class="post-item">
+                <!-- Display image -->
+                <img src="{% static post.image_url %}" alt="My image" class="post-image">
+                <!-- <img src="{{ post.image_url.url }}" alt="{{ post.title }}" class="post-image"> -->
+
+                <!-- Display title -->
+                <h2>{{ post.title }}</h2>
+
+                <!-- Display description -->
+                <p>{{ post.description }}</p>
+
+                <!-- Display Read More link if available -->
+                {% if post.read_more_link %}
+                <a href="{{ post.read_more_link }}" class="read-more">Read More</a>
+                {% endif %}
+            </div>
+            {% empty %}
+            <p>No blog posts available.</p>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>

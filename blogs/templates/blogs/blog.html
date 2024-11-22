@@ -699,7 +699,7 @@ h1 {
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 10px;
 }
 
 .post {
@@ -782,23 +782,24 @@ footer p {
 
     <section class="blog-posts">
         <div class="container">
-            {% for blog in blogs %}
-            <div class="post">
-                <img src="{{ blog.image_url.url }}" alt="{{ blog.title }}">
-                <div class="post-content">
-                    <div class="post-header">
-                        <span class="date">{{ blog.created_at|date:"d F Y" }}</span>
-                        <span class="category">{{ blog.category }}</span>
+                {% for blog in blogs %}
+                    <div class="post">
+                        <img src="{% static blog.image_url %}" alt="{{ blog.title }}">
+                        <div class="post-content">
+                            <div class="post-header">
+                                <span class="date">{{ blog.created_at|date:"d F Y" }}</span>
+                                <span class="category">{{ blog.category }}</span>
+                            </div>
+                            <h2>{{ blog.title }}</h2>
+                            <p>{{ blog.post_title }}</p>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
                     </div>
-                    <h2>{{ blog.title }}</h2>
-                    <p>{{ blog.post_title }}</p>
-                    <a href="#" class="read-more">Read More</a>
-                </div>
-            </div>
-            {% empty %}
-            <p>No blog posts available.</p>
-            {% endfor %}
+                {% empty %}
+                <p>No blog posts available.</p>
+                {% endfor %}
         </div>
+        
     </section>
 
     <footer>

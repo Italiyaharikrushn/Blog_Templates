@@ -441,12 +441,35 @@
         <h1>Blog Entries</h1>
     </header>
 
+    <section class="blog-section">
+        <div class="container">
+                {% for blog in blogs %}
+                    <div class="post">
+                        <img src="{{ blog.image_url.url }}" alt="{{ blog.title }}">
+                        <div class="post-content">
+                            <div class="post-header">
+                                <span class="date">{{ blog.created_at|date:"d F Y" }}</span>
+                                <span class="category">{{ blog.category }}</span>
+                            </div>
+                            <h2>{{ blog.title }}</h2>
+                            <p>{{ blog.post_title }}</p>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </div>
+                {% empty %}
+                <p>No blog posts available.</p>
+                {% endfor %}
+        </div>
+        <div class="background-overlay" id="backgroundOverlay">
+            <div class="overlay-title" id="overlayTitle"></div>
+        </div>
+    </section>
     <section class="blog-section container">
         <div class="row">
-            {% for post in blog_entries %}
-            <div class="col-lg-3 col-md-3 col-sm-6 mb-4">
+            {% for blog in blogs %}
+            <div class="col-3">
                 <div class="card h-100">
-                    <img class="card-img-top" src="{{ post.image_url }}" alt="Image for {{ post.title }}">
+                    <img src="{{ blog.image_url.url }}" alt="{{ blog.title }}">
                     <div class="card-body d-flex flex-column">
                         <h6 class="card-title">{{ post.title }}</h6>
                         <p class="card-text text-muted small">{{ post.category }}</p>
@@ -560,61 +583,6 @@
         </div>
     </section>
 
-    <section>
-        <div class="container">
-            <div class="post">  
-
-                <img src="images/post1.jpg" alt="Post 1">
-                <div class="post-content">
-                    <div class="post-header">
-                        <span class="date">25th May</span>
-                        <span class="category">Travel</span>
-                    </div>
-                    <h2>Holiday is awesome when loved one beside me.</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
-                        tincidunt.</p>
-                    <a href="#" class="read-more">Read More</a>
-                </div>
-            </div>
-
-            <div   class="post">
-                <img src="images/post2.jpg" alt="Post 2">
-                <div class="post-content">
-                    <div class="post-header">
-                        <span class="date">25th May</span>
-                        <span class="category">Life</span>
-                    </div>
-                    <h2>The bitter truth that you should know.</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
-                        tincidunt.</p>
-                    <a href="#" class="read-more">Read More</a>
-                </div>
-            </div>
-
-            <div   class="sidebar">
-                <div class="advertisement">
-                    <h2>"Place your Advertisement here"</h2>
-                </div>
-
-                <div class="category-list">
-                    <h2>Category</h2>
-                    <p>Browse all your favourite categories:</p>
-                    <ul>
-                        <li>Lifestyle (23)</li>
-                        <li>Movie (02)</li>
-                        <li>Travel (11)</li>
-                        <li>Sports (05)</li>
-                        <li>Music (01)</li>
-                        <li>Education (15)</li>
-                        <li>International (09)</li>
-                        <li>Design (26)</li>
-                        <li>News (01)</li>
-                        <li>Review (14)</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
     <footer class="text-center">
         <p class="text">© 2024 Copyright, All Rights Reserved</p>
     </footer>
@@ -654,8 +622,290 @@
 </body>
 
 </html> -->
-
 {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+
+    <!-- Link to custom CSS file -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <!-- Link to Bootstrap CSS for styling -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- Inline CSS for custom styling -->
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header,
+        footer {
+            position: fixed;
+            left: 0;
+            width: 100%;
+            background-color: #fff;
+            z-index: 100;
+        }
+
+        header {
+            top: 0;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            bottom: 0;
+            padding: 15px;
+            text-align: center;
+            background-color: #f8f9fa;
+        }
+
+        /* Blog Section */
+        .blog-section {
+            margin-top: 80px;
+            /* To prevent overlap with fixed header */
+            margin-bottom: 60px;
+            /* To prevent overlap with fixed footer */
+            padding: 60px 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .blog-section .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .blog-section .card {
+            width: 100%;
+            /* Ensure cards take full width in mobile view */
+            max-width: 350px;
+            /* Limit card width */
+            margin-bottom: 30px;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background-color: #fff;
+        }
+
+        .blog-section .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .blog-section .card-img-top {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .blog-section .card-img-top:hover {
+            transform: scale(1.1);
+        }
+
+        .blog-section .card-body {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .blog-section .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #343a40;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .blog-section .card-text {
+            font-size: 0.875rem;
+            line-height: 1.5;
+            color: #6c757d;
+            margin-bottom: 20px;
+        }
+
+        .blog-section .card-text small {
+            color: #adb5bd;
+        }
+
+        /* Category label */
+        .blog-section .card-body .category {
+            font-size: 14px;
+            color: #007bff;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .background-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+            filter: grayscale(100%);
+        }
+
+        .background-overlay.active {
+            display: flex;
+        }
+
+        .overlay-title {
+            font-size: 2rem;
+            color: #fff;
+            text-align: center;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .card-title {
+            text-transform: uppercase;
+            font-size: medium;
+            /* color: aliceblue; */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .post {
+            width: 30%;
+            margin-bottom: 20px;
+        }
+
+        .post img {
+            width: 100%;
+            height: auto;
+        }
+
+        .post-content {
+            padding: 10px;
+        }
+
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .post-header span {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .post h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .post p {
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .read-more {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            text-decoration: none;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header class="text-center">
+        <h1>Blog Entries</h1>
+    </header>
+
+    <!-- Blog Section -->
+    <section class="blog-section">
+        <div class="container">
+            <div class="row">
+                <!-- Loop through blogs and display each one -->
+                {% for blog in blogs %}
+                <div class="col-md-4 mb-4">
+                    <!-- Create a column for each blog, 3 per row on medium screens and larger -->
+                    <div class="card" onclick="showOverlay('{{ blog.image_url.url }}', '{{ blog.title }}')">
+                        <img src="{{ blog.image_url.url }}" class="card-img-top" alt="{{ blog.title }}">
+                        <div class="card-body">
+                            <span>{{ blog.category }}</span>
+                            <h5 class="card-title">{{ blog.title }}</h5>
+                            <p class="card-text">{{ blog.post_title }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <p>No blog posts available.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Background Overlay for Image View -->
+    <div class="background-overlay" id="backgroundOverlay">
+        <div class="overlay-title" id="overlayTitle"></div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="text-center">
+        <p class="text">© 2024 Copyright, All Rights Reserved</p>
+    </footer>
+
+    <!-- JavaScript to handle overlay functionality -->
+    <script>
+        function showOverlay(imageUrl, title) {
+            const overlay = document.getElementById("backgroundOverlay");
+            const overlayTitle = document.getElementById("overlayTitle");
+
+            // Set the background image and title in the overlay
+            overlay.style.backgroundImage = `url(${imageUrl})`;
+            overlayTitle.textContent = title;
+
+            // Show the overlay
+            overlay.classList.add("active");
+        }
+
+        // Close overlay when clicked
+        document.getElementById("backgroundOverlay").addEventListener("click", function () {
+            this.classList.remove("active");
+        });
+    </script>
+</body>
+
+</html>
+
+
+<!-- {% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -784,7 +1034,7 @@ footer p {
         <div class="container">
                 {% for blog in blogs %}
                     <div class="post">
-                        <img src="{% static blog.image_url %}" alt="{{ blog.title }}">
+                        <img src="{{ blog.image_url.url }}" alt="{{ blog.title }}">
                         <div class="post-content">
                             <div class="post-header">
                                 <span class="date">{{ blog.created_at|date:"d F Y" }}</span>
@@ -807,4 +1057,60 @@ footer p {
     </footer>
 </body>
 
-</html>
+</html> -->
+
+<!-- <section>
+    <div class="container">
+        <div class="post">  
+
+            <img src="images/post1.jpg" alt="Post 1">
+            <div class="post-content">
+                <div class="post-header">
+                    <span class="date">25th May</span>
+                    <span class="category">Travel</span>
+                </div>
+                <h2>Holiday is awesome when loved one beside me.</h2>
+                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
+                    tincidunt.</p>
+                <a href="#" class="read-more">Read More</a>
+            </div>
+        </div>
+
+        <div   class="post">
+            <img src="images/post2.jpg" alt="Post 2">
+            <div class="post-content">
+                <div class="post-header">
+                    <span class="date">25th May</span>
+                    <span class="category">Life</span>
+                </div>
+                <h2>The bitter truth that you should know.</h2>
+                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
+                    tincidunt.</p>
+                <a href="#" class="read-more">Read More</a>
+            </div>
+        </div>
+
+        <div   class="sidebar">
+            <div class="advertisement">
+                <h2>"Place your Advertisement here"</h2>
+            </div>
+
+            <div class="category-list">
+                <h2>Category</h2>
+                <p>Browse all your favourite categories:</p>
+                <ul>
+                    <li>Lifestyle (23)</li>
+                    <li>Movie (02)</li>
+                    <li>Travel (11)</li>
+                    <li>Sports (05)</li>
+                    <li>Music (01)</li>
+                    <li>Education (15)</li>
+                    <li>International (09)</li>
+                    <li>Design (26)</li>
+                    <li>News (01)</li>
+                    <li>Review (14)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section> -->

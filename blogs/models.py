@@ -14,7 +14,7 @@ def get_video_upload_to(instance, filename):
 class Blog(models.Model):
     category = models.CharField(max_length=100)
     title = models.CharField(max_length=200)
-    image_url = models.ImageField(upload_to=get_image_upload_to)
+    image_url = models.ImageField(upload_to='profile_images/')
     post_title = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -24,26 +24,26 @@ class Blog(models.Model):
 class Travel(models.Model):
     title = models.CharField(max_length=200)
     description = models.CharField(max_length=500)
-    image_url = models.ImageField(upload_to=get_image_upload_to)
+    image_url = models.ImageField(upload_to='profile_images/')
     created_at = models.DateTimeField(auto_now_add=True)
     read_more_link = models.URLField(blank=True, null=True)
 
 class MySelf(models.Model):
-    video = models.FileField(upload_to=get_video_upload_to, blank=True, null=True)
+    video = models.FileField(upload_to='profile_images/')
     title = models.CharField(max_length=200)
     description = models.CharField(max_length=500)
     created_at = models.DateTimeField(auto_now_add=True)
     read_more_link = models.URLField(blank=True, null=True)
 
 class PostPage(models.Model):
-    image_url = models.ImageField(upload_to=get_image_upload_to)
+    image_url = models.ImageField(upload_to='profile_images/')
     title = models.CharField(max_length=200)
     description = models.CharField(max_length=500)
     read_more_link = models.URLField(blank=True, null=True)
 
 class Biography(models.Model):
     name = models.CharField(max_length=255)
-    profile_img = models.ImageField(upload_to=get_image_upload_to)
+    profile_img = models.ImageField(upload_to='profile_images/')
     bio = models.TextField()
     facebook_link = models.URLField(blank=True, null=True)
     twitter_link = models.URLField(blank=True, null=True)
@@ -58,7 +58,7 @@ class Post(models.Model):
     status = models.CharField(max_length=50, blank=True, null=True)
 
 class Advertisement(models.Model):
-    image = models.ImageField(upload_to=get_image_upload_to)
+    image = models.ImageField(upload_to='profile_images/')
     text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 

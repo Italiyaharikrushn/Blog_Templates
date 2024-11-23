@@ -16,4 +16,7 @@ urlpatterns = [
     path('posts/', views.post_view, name='posts'),
     path('advertisements/', views.advertisement_view, name='advertisements'),
     path('categories/', views.category_view, name='categories'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+# + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

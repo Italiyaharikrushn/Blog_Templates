@@ -106,7 +106,8 @@
         <div class="container">
             {% for ad in advertisements %}
             <div class="advertisement">
-                <img src="{% static 'image/img06.jpg' %}" alt="Advertisement">
+                <img src="{{ ad.image_url.url }}" alt="Advertisement">
+                <!-- <img src="{% static 'image/img06.jpg' %}" alt="Advertisement"> -->
                 <p>{{ ad.text }}</p>
             </div>
             {% empty %}

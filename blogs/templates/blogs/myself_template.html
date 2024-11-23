@@ -97,7 +97,8 @@
         <div class="myself-item">
             <!-- {% if item.video %} -->
             <video width="320" height="240" controls autoplay>
-                <source src="{% static item.video %}" type="video/mp4">
+                <source src="{{ item.video.url }}" type="video/mp4">
+                <!-- <source src="{% static item.video %}" type="video/mp4"> -->
                 <!-- <source src="{{ item.video.url }}" type="video/mp4"> -->
                 Your browser does not support the video tag.
             </video>

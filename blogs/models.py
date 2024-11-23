@@ -1,5 +1,6 @@
 import uuid
 from django.db import models
+from datetime import date
 
 def get_image_upload_to(instance, filename):
     ext = filename.split('.')[-1]
@@ -23,6 +24,7 @@ class Blog(models.Model):
 
 class Travel(models.Model):
     title = models.CharField(max_length=200)
+    date = models.DateField(default=date.today)
     description = models.CharField(max_length=500)
     image_url = models.ImageField(upload_to='profile_images/')
     created_at = models.DateTimeField(auto_now_add=True)

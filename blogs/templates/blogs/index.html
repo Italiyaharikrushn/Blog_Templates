@@ -218,3 +218,838 @@
     </script>
 </body>
 </html>
+
+<!-- {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header,
+        footer {
+            position: fixed;
+            left: 0;
+            width: 100%;
+        }
+
+        header {
+            top: 0;
+        }
+
+        footer {
+            bottom: 0;
+        }
+
+        h1 {
+            margin-bottom: 0;
+        }
+
+        .text {
+            margin: 0;
+        }
+
+        .blog-section {
+            position: relative;
+            padding: 60px 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .blog-section .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .blog-section .card {
+            border: none;
+            top: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .blog-section .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .blog-section .card-img-top {
+            height: 200px;
+            object-fit: cover;
+            border-radius: 0.25rem 0.25rem 0 0;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .blog-section .card-img-top:hover {
+            transform: scale(1.05);
+        }
+
+        .blog-section .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 15px;
+        }
+
+        .blog-section .card-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #343a40;
+            margin-bottom: 0.5rem;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .blog-section .card-text {
+            font-size: 0.875rem;
+            line-height: 1.5;
+            color: #6c757d;
+        }
+
+        .blog-section .card-text small {
+            color: #adb5bd;
+        }
+
+        .blog-section .text-center {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #868e96;
+        }
+
+        .background-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+            filter: grayscale(100%);
+        }
+
+        .background-overlay.active {
+            display: flex;
+        }
+
+        .background-overlay .overlay-title {
+            font-size: 2rem;
+            color: rgb(126, 93, 93);
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-top: 20px;
+            padding: 10px 20px;
+            border-radius: 10px;
+        }
+
+        .card-title {
+            text-transform: uppercase;
+            font-size: medium;
+            color: aliceblue;
+        }
+
+        .card-post_title {
+            color: aliceblue;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+
+        }
+
+        .post {
+            width: 30%;
+            margin-bottom: 20px;
+        }
+
+        .post img {
+            width: 100%;
+            height: auto;
+        }
+
+        .post-content {
+            padding: 10px;
+        }
+
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .post-header span {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .post h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .post p {
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .read-more {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .profile {
+            width: 30%;
+            text-align: center;
+        }
+
+        .profile img {
+            width: 150px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .profile h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .profile p {
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .social-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .social-links li {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .social-links a {
+            color: #333;
+            text-decoration: none;
+
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+
+        }
+
+        .hero {
+            width: 60%;
+            position: relative;
+        }
+
+        .hero img {
+            width: 100%;
+            height: auto;
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0,
+                    0.5);
+            color: white;
+            padding: 10px 20px;
+            border-radius:
+                50%;
+            cursor: pointer;
+        }
+
+        .content {
+            width: 40%;
+        }
+
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .post-header span {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .content h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .content p {
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .read-more {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .sidebar {
+            width: 30%;
+        }
+
+        .sidebar h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .sidebar ol {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .sidebar .date,
+        .sidebar .tag {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .sidebar .tag {
+            background-color: #f0f0f0;
+            padding: 2px 5px;
+            border-radius: 3px;
+            margin-left: 5px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+
+        }
+
+        .post {
+            width: 30%;
+            margin-bottom: 20px;
+        }
+
+        .post img {
+            width: 100%;
+            height: auto;
+        }
+
+        .post-content {
+            padding: 10px;
+        }
+
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .post-header span {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .post h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .post p {
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .read-more {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .sidebar {
+            width: 30%;
+        }
+
+        .sidebar .advertisement {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .sidebar .category-list {
+            margin-top: 20px;
+        }
+
+        .sidebar .category-list h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .sidebar .category-list ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar .category-list li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="text-center">
+        <h1>Blog Entries</h1>
+    </header>
+
+    <section class="blog-section">
+        <div class="container">
+                {% for blog in blogs %}
+                    <div class="post">
+                        <img src="{{ blog.image_url.url }}" alt="{{ blog.title }}">
+                        <div class="post-content">
+                            <div class="post-header">
+                                <span class="date">{{ blog.created_at|date:"d F Y" }}</span>
+                                <span class="category">{{ blog.category }}</span>
+                            </div>
+                            <h2>{{ blog.title }}</h2>
+                            <p>{{ blog.post_title }}</p>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </div>
+                {% empty %}
+                <p>No blog posts available.</p>
+                {% endfor %}
+        </div>
+        <div class="background-overlay" id="backgroundOverlay">
+            <div class="overlay-title" id="overlayTitle"></div>
+        </div>
+    </section>
+    <section class="blog-section container">
+        <div class="row">
+            {% for blog in blogs %}
+            <div class="col-3">
+                <div class="card h-100">
+                    <img src="{{ blog.image_url.url }}" alt="{{ blog.title }}">
+                    <div class="card-body d-flex flex-column">
+                        <h6 class="card-title">{{ post.title }}</h6>
+                        <p class="card-text text-muted small">{{ post.category }}</p>
+                        <p class="card-text">{{ post.post_title }}</p>
+                        <p class="card-text text-muted">
+                            <small>{{ post.created_at|date:"F d, Y" }}</small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12">
+                <p class="text-center text-muted">No blog entries available.</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="background-overlay" id="backgroundOverlay">
+            <div class="overlay-title" id="overlayTitle"></div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="post">
+                <img src="images/mountain-hiker.jpg" alt="Hiker on a mountain">
+                <div class="post-content">
+                    <div class="post-header">
+                        <span class="date">25th May</span>
+                        <span class="category">Travel</span>
+                    </div>
+                    <h2>I get up in the morning looking for adventure.</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
+                        tincidunt.</p>
+                    <a href="#" class="read-more">Read More</a>
+                </div>
+            </div>
+
+            <div   class="post">
+                <img src="images/neuschwanstein-castle.jpg" alt="Neuschwanstein Castle">
+                <div class="post-content">
+                    <div class="post-header">
+                        <span class="date">25th May</span>
+                        <span class="category">Travel</span>
+                    </div>
+                    <h2>Letter from the desk of an unsuccessful designer.</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
+                        tincidunt.</p>
+                    <a href="#" class="read-more">Read More</a>
+                </div>
+            </div>
+
+            <div   class="profile">
+                <img src="images/john-aston.jpg" alt="John Aston">
+                <h2>JOHN ASTON</h2>
+                <p>Hi, I am John Aston. Duis autem vel eum dolor in hendrerit in vulputate velit esse molestie
+                    consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto.</p>  
+
+                <ul class="social-links">
+                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                    <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>  
+
+                    <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                    <li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="hero">  
+
+                <img src="images/hero-image.jpg" alt="Hero Image">
+                <div class="play-button">
+                    <i class="fas fa-play-circle"></i>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="post-header">
+                    <span class="date">19th May</span>
+                    <span class="category">Lifestyle</span>
+                </div>
+                <h2>Exploring the unknown truth about myself</h2>
+                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
+                    enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis...</p>
+                <a href="#"   class="read-more">Read More</a>
+            </div>
+
+            <div class="sidebar">
+                <h2>Recent Posts</h2>
+                <ol>
+                    <li>
+                        <a href="#">I get up in the morning looking for an adventure.</a>
+                        <span class="date">25th May</span>
+                        <span class="tag">HOT</span>
+                    </li>
+                    <li>
+                        <a href="#">Letter from the desk of an unsuccessful designer.</a>
+                        <span class="date">25th May</span>
+                        <span class="tag">TRENDING</span>
+                    </li>
+                    <li>
+                        <a href="#">Exploring the unknown truth about myself - My Story.</a>
+                        <span class="date">19th May</span>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <footer class="text-center">
+        <p class="text">© 2024 Copyright, All Rights Reserved</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const cards = document.querySelectorAll(".card");
+            const overlay = document.getElementById("backgroundOverlay");
+            const overlayTitle = document.getElementById("overlayTitle");
+
+            cards.forEach(card => {
+                card.addEventListener("click", () => {
+                    const imgSrc = card.querySelector(".card-img-top").src;
+                    const titleText = card.querySelector(".card-title").textContent;
+
+                    overlay.style.backgroundImage = `url(${imgSrc})`;
+                    overlayTitle.textContent = titleText;
+
+                    overlay.classList.add("active");
+                    overlay.setAttribute("aria-hidden", "false");
+                    overlay.focus();
+                });
+            });
+
+            overlay.addEventListener("click", () => {
+                overlay.classList.remove("active");
+                overlay.style.backgroundImage = '';
+                overlayTitle.textContent = '';
+                overlay.setAttribute("aria-hidden", "true");
+            });
+        });
+    </script>
+</body>
+
+</html> -->
+
+<!-- {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body and general layout */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+.blog-posts {
+    padding: 20px 0;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.post {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 30%;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.post:hover {
+    transform: translateY(-5px);
+}
+
+.post img {
+    width: 100%;
+    height: auto;
+}
+
+.post-content {
+    padding: 15px;
+}
+
+.post-header {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.date {
+    margin-right: 10px;
+}
+
+.category {
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin: 10px 0;
+}
+
+p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.read-more {
+    display: inline-block;
+    text-decoration: none;
+    color: #007BFF;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.read-more:hover {
+    color: #0056b3;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    margin-top: 40px;
+}
+
+footer p {
+    font-size: 0.9rem;
+}
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>My Blog</h1>
+    </header>
+
+    <section class="blog-posts">
+        <div class="container">
+                {% for blog in blogs %}
+                    <div class="post">
+                        <img src="{{ blog.image_url.url }}" alt="{{ blog.title }}">
+                        <div class="post-content">
+                            <div class="post-header">
+                                <span class="date">{{ blog.created_at|date:"d F Y" }}</span>
+                                <span class="category">{{ blog.category }}</span>
+                            </div>
+                            <h2>{{ blog.title }}</h2>
+                            <p>{{ blog.post_title }}</p>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </div>
+                {% empty %}
+                <p>No blog posts available.</p>
+                {% endfor %}
+        </div>
+        
+    </section>
+
+    <footer>
+        <p>&copy; 2024 My Blog. All rights reserved.</p>
+    </footer>
+</body>
+
+</html> -->
+
+<!-- <section>
+    <div class="container">
+        <div class="post">  
+
+            <img src="images/post1.jpg" alt="Post 1">
+            <div class="post-content">
+                <div class="post-header">
+                    <span class="date">25th May</span>
+                    <span class="category">Travel</span>
+                </div>
+                <h2>Holiday is awesome when loved one beside me.</h2>
+                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
+                    tincidunt.</p>
+                <a href="#" class="read-more">Read More</a>
+            </div>
+        </div>
+
+        <div   class="post">
+            <img src="images/post2.jpg" alt="Post 2">
+            <div class="post-content">
+                <div class="post-header">
+                    <span class="date">25th May</span>
+                    <span class="category">Life</span>
+                </div>
+                <h2>The bitter truth that you should know.</h2>
+                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
+                    tincidunt.</p>
+                <a href="#" class="read-more">Read More</a>
+            </div>
+        </div>
+
+        <div   class="sidebar">
+            <div class="advertisement">
+                <h2>"Place your Advertisement here"</h2>
+            </div>
+
+            <div class="category-list">
+                <h2>Category</h2>
+                <p>Browse all your favourite categories:</p>
+                <ul>
+                    <li>Lifestyle (23)</li>
+                    <li>Movie (02)</li>
+                    <li>Travel (11)</li>
+                    <li>Sports (05)</li>
+                    <li>Music (01)</li>
+                    <li>Education (15)</li>
+                    <li>International (09)</li>
+                    <li>Design (26)</li>
+                    <li>News (01)</li>
+                    <li>Review (14)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section> -->

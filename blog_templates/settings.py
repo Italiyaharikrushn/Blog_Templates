@@ -245,6 +245,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # Additional static files directories
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),  # Default static directory
+    os.path.join(BASE_DIR, 'blog_templates/static'),
+
+    # '/home/harikrushn/Downloads/project/blog_templates/static',
+    # '/home/harikrushn/Downloads/project/blog_templates/blog_templates/static',
 ]
 
 # Media files (user-uploaded content like profile images)

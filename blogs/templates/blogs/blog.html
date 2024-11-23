@@ -64,10 +64,20 @@
         }
 
         .blog-section .card {
-            width: 100%;
-            /* Ensure cards take full width in mobile view */
+            /* width: 100%;
+            Ensure cards take full width in mobile view
             max-width: 350px;
-            /* Limit card width */
+            Limit card width
+            margin-bottom: 30px;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background-color: #fff; */
+
+            width: 100%;
+            max-width: 350px;
             margin-bottom: 30px;
             border: none;
             border-radius: 8px;
@@ -75,6 +85,11 @@
             overflow: hidden;
             transition: all 0.3s ease;
             background-color: #fff;
+
+            /* Ensure equal height */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .blog-section .card:hover {
@@ -94,7 +109,12 @@
         }
 
         .blog-section .card-body {
-            padding: 20px;
+            /* padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; */
+
+            flex-grow: 1;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -228,7 +248,7 @@
             <div class="row">
                 <!-- Loop through blogs and display each one -->
                 {% for blog in blogs %}
-                <div class="col-md-4 mb-4">
+                <div class="col-3 mb-4">
                     <!-- Create a column for each blog, 3 per row on medium screens and larger -->
                     <div class="card" onclick="showOverlay('{{ blog.image_url.url }}', '{{ blog.title }}')">
                         <img src="{{ blog.image_url.url }}" class="card-img-top" alt="{{ blog.title }}">

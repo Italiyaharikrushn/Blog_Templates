@@ -125,6 +125,7 @@
             text-transform: uppercase;
         }
 
+        /* Background overlay for image view */
         .background-overlay {
             position: absolute;
             top: 0;
@@ -155,16 +156,18 @@
             margin-top: 20px;
         }
 
-        .post {
-            width: 30%;
-            margin-bottom: 20px;
+        /* Main Section styling */
+        .main-section .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
-        .post img {
-            width: 100%;
-            height: auto;
+        .main-section .col-6 {
+            flex: 1;
         }
 
+        /* Post content styling */
         .post-content {
             padding: 10px;
         }
@@ -203,7 +206,7 @@
 
 <body>
     <!-- Header Section -->
-    <header class="text-center">
+    <header>
         <h1>Blog Entries</h1>
     </header>
 
@@ -213,7 +216,7 @@
             <div class="row">
                 <!-- Loop through blogs and display each one -->
                 {% for blog in blogs %}
-                <div class="col-4">
+                <div class="col-md-4">
                     <div class="card" onclick="showOverlay('{{ blog.image_url.url }}', '{{ blog.title }}')">
                         <img src="{{ blog.image_url.url }}" class="card-img-top" alt="{{ blog.title }}">
                         <div class="card-body">
@@ -235,7 +238,7 @@
         <div class="overlay-title" id="overlayTitle"></div>
     </div>
 
-    <!-- Include Templates -->
+    <!-- Include additional templates -->
     <section class="main-section">
         <div class="container">
             <div class="row">
@@ -248,11 +251,10 @@
             </div>
         </div>
     </section>
-    
 
     <!-- Footer Section -->
-    <footer class="text-center">
-        <p class="text">© 2024 Copyright, All Rights Reserved</p>
+    <footer>
+        <p>© 2024 Copyright, All Rights Reserved</p>
     </footer>
 
     <!-- JavaScript to handle overlay functionality -->

@@ -6,79 +6,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biography</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* Reset default styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* Set up a basic font and background for the body */
+        /* Body styling */
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f4f4f4;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        /* Header styling */
-        header {
-            background-color: #333;
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-        }
-
-        header h1 {
-            font-size: 2.5rem;
         }
 
         /* Biography section */
         .biography {
             padding: 40px 0;
-            background-color: #fff;
-        }
-
-        .container {
-            width: 80%;
-            margin: 0 auto;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
+            background-color: #f4f4f4;
         }
 
         /* Profile card styling */
         .profile {
-            background-color: #ffffff;
-            border: 1px solid #ddd;
-            padding: 20px;
-            margin: 10px;
-            width: 45%;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #2c2c2c;
+            color: #fff;
+            border-radius: 10px;
+            text-align: center;
+            padding: 30px 20px;
+            margin: 20px;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease;
         }
 
         .profile:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
         }
 
         .profile img {
-            width: 100%;
-            height: auto;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
             margin-bottom: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         .profile h2 {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             margin-bottom: 10px;
+            text-transform: uppercase;
+            font-weight: bold;
         }
 
         .profile p {
-            font-size: 1rem;
-            color: #555;
+            font-size: 0.9rem;
+            color: #dcdcdc;
             margin-bottom: 20px;
+            line-height: 1.4;
         }
 
         /* Social links styling */
@@ -86,7 +73,8 @@
             list-style: none;
             padding: 0;
             display: flex;
-            gap: 15px;
+            justify-content: center;
+            gap: 10px;
         }
 
         .social-links li {
@@ -94,57 +82,66 @@
         }
 
         .social-links a {
-            color: #333;
-            font-size: 1.5rem;
+            color: #fff;
+            font-size: 1.2rem;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #444;
+            border-radius: 30%;
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
         .social-links a:hover {
-            color: #0073e6;
-        }
-
-        /* Footer styling */
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #333;
-            color: white;
-            margin-top: 20px;
-        }
-
-        footer p {
-            font-size: 1rem;
+            background-color: #634f3d;
+            transform: scale(1.1);
         }
     </style>
 </head>
 
 <body>
-    <header>
-        <h1>About Me</h1>
-    </header>
-
     <section class="biography">
         <div class="container">
             {% for bio in biographies %}
             <div class="profile">
-                <img src="{{ bio.profile_img.url }}" alt="{{ bio.name }}">
-                <!-- <img src="{% static bio.profile_img %}" alt="{{ bio.name }}"> -->
-                <!-- <img src="{{ bio.profile_img.url }}" alt="{{ bio.name }}"> -->
+                <!-- Display Profile Image -->
+                <img src="{{ bio.profile_img.url }}" alt="{{ bio.name }}'s Profile Picture">
+                <!-- Display Name -->
                 <h2>{{ bio.name }}</h2>
+                <!-- Display Biography Text -->
                 <p>{{ bio.bio }}</p>
+                <!-- Social Media Links -->
                 <ul class="social-links">
                     {% if bio.facebook_link %}
-                    <li><a href="{{ bio.facebook_link }}"><i class="fab fa-facebook-f"></i></a></li>
+                    <li>
+                        <a href="{{ bio.facebook_link }}" target="_blank" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    </li>
                     {% endif %}
                     {% if bio.twitter_link %}
-                    <li><a href="{{ bio.twitter_link }}"><i class="fab fa-twitter"></i></a></li>
+                    <li>
+                        <a href="{{ bio.twitter_link }}" target="_blank" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </li>
                     {% endif %}
                     {% if bio.google_link %}
-                    <li><a href="{{ bio.google_link }}"><i class="fab fa-google-plus-g"></i></a></li>
+                    <li>
+                        <a href="{{ bio.google_link }}" target="_blank" aria-label="Google+">
+                            <i class="fab fa-google-plus-g"></i>
+                        </a>
+                    </li>
                     {% endif %}
                     {% if bio.linkedin_link %}
-                    <li><a href="{{ bio.linkedin_link }}"><i class="fab fa-linkedin-in"></i></a></li>
+                    <li>
+                        <a href="{{ bio.linkedin_link }}" target="_blank" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </li>
                     {% endif %}
                 </ul>
             </div>
@@ -153,10 +150,6 @@
             {% endfor %}
         </div>
     </section>
-
-    <footer>
-        <p>&copy; 2024 Biography. All rights reserved.</p>
-    </footer>
 </body>
 
 </html>

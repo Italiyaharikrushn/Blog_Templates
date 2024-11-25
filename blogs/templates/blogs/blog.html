@@ -28,7 +28,7 @@
             left: 0;
             width: 100%;
             background-color: #fff;
-            z-index: 100;
+            z-index: 1;
         }
 
         header {
@@ -48,10 +48,7 @@
         /* Blog Section */
         .blog-section {
             margin-top: 80px;
-            /* To prevent overlap with fixed header */
-            margin-bottom: 60px;
-            /* To prevent overlap with fixed footer */
-            padding: 60px 15px;
+            padding: 0 15px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -61,32 +58,18 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
+            gap: 15px;
         }
 
         .blog-section .card {
-            /* width: 100%;
-            Ensure cards take full width in mobile view
-            max-width: 350px;
-            Limit card width
-            margin-bottom: 30px;
-            border: none;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            transition: all 0.3s ease;
-            background-color: #fff; */
-
             width: 100%;
             max-width: 350px;
-            margin-bottom: 30px;
             border: none;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             overflow: hidden;
             transition: all 0.3s ease;
             background-color: #fff;
-
-            /* Ensure equal height */
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -109,11 +92,6 @@
         }
 
         .blog-section .card-body {
-            /* padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between; */
-
             flex-grow: 1;
             display: flex;
             flex-direction: column;
@@ -151,6 +129,7 @@
             position: absolute;
             top: 0;
             left: 0;
+            right: 0;
             width: 100%;
             height: 100%;
             display: none;
@@ -174,20 +153,6 @@
             text-align: center;
             font-weight: bold;
             margin-top: 20px;
-        }
-
-        .card-title {
-            text-transform: uppercase;
-            font-size: medium;
-            /* color: aliceblue; */
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
         }
 
         .post {
@@ -248,12 +213,11 @@
             <div class="row">
                 <!-- Loop through blogs and display each one -->
                 {% for blog in blogs %}
-                <div class="col-3 mb-4">
-                    <!-- Create a column for each blog, 3 per row on medium screens and larger -->
+                <div class="col-4">
                     <div class="card" onclick="showOverlay('{{ blog.image_url.url }}', '{{ blog.title }}')">
                         <img src="{{ blog.image_url.url }}" class="card-img-top" alt="{{ blog.title }}">
                         <div class="card-body">
-                            <span>{{ blog.category }}</span>
+                            <span class="category">{{ blog.category }}</span>
                             <h5 class="card-title">{{ blog.title }}</h5>
                             <p class="card-text">{{ blog.post_title }}</p>
                         </div>
@@ -266,11 +230,25 @@
         </div>
     </section>
 
-
     <!-- Background Overlay for Image View -->
     <div class="background-overlay" id="backgroundOverlay">
         <div class="overlay-title" id="overlayTitle"></div>
     </div>
+
+    <!-- Include Templates -->
+    <section class="main-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    {% include './travel_template.html' %}
+                </div>
+                <div class="col-6">
+                    {% include './biography_template.html' %}
+                </div>
+            </div>
+        </div>
+    </section>
+    
 
     <!-- Footer Section -->
     <footer class="text-center">

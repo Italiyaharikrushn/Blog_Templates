@@ -14,102 +14,108 @@
             box-sizing: border-box;
         }
 
-        /* Body */
+        /* General Body Styles */
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: #fff;
             color: #333;
         }
 
-        /* Header */
-        header {
-            background-color: #4CAF50;
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-
-        /* Categories Section */
+        /* Section: Categories */
         .categories {
             padding: 40px 0;
-            background-color: #fff;
+            text-align: center;
         }
 
-        .container {
-            width: 80%;
-            margin: 0 auto;
+        .categories h2 {
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .categories p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        /* Container for Centering */
+        .category-container {
             display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
         }
 
-        .category {
+        /* Category Card Styles */
+        .category-card {
             background-color: #f9f9f9;
             border: 1px solid #ddd;
+            border-radius: 10px;
             padding: 20px;
-            width: 30%;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
+            width: 300px;
             text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        .category h2 {
-            font-size: 24px;
-            margin-bottom: 10px;
+        .category-card h3 {
+            font-size: 22px;
+            color: #333;
+            margin-bottom: 15px;
         }
 
-        .category p {
+        /* Category List */
+        .category-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            text-align: justify;
+            
+        }
+
+        .category-item {
             font-size: 16px;
-            color: #666;
-            margin-bottom: 10px;
+            color: #333;
         }
 
-        .category span {
-            font-size: 14px;
-            color: #888;
+        .category-item a {
+            text-decoration: none;
+            color: #000;
+            font-weight: bold;
         }
 
-        /* Empty State */
-        .categories .empty {
-            text-align: center;
-            font-size: 18px;
-            color: #999;
+        .category-item a:hover {
+            text-decoration: underline;
         }
 
-        /* Footer */
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            margin-top: 40px;
+        .category-item span {
+            color: #555;
+            margin-left: 5px;
+            text-align: justify;
         }
     </style>
 </head>
 
 <body>
-    <header>
-        <h1>Categories</h1>
-    </header>
-
     <section class="categories">
-        <div class="container">
-            {% for category in categories %}
-            <div class="category">
-                <h2>{{ category.title }}</h2>
-                <p>{{ category.description }}</p>
-                <span>{{ category.name }}</span>
-                <span>{{ category.item_count }}</span>
+        <h2>Category</h2>
+        <p>Browse all your favorite categories</p>
+        <div class="category-container">
+            <div class="category-card">
+                <h3>Categories</h3>
+                <div class="category-list">
+                    {% for category in categories %}
+                    <div class="category-item">
+                        <a href="#">{{ category.name }}</a>
+                        <span>({{ category.item_count|default:"00" }})</span>
+                    </div>
+                    {% empty %}
+                    <p>No categories available.</p>
+                    {% endfor %}
+                </div>
             </div>
-            {% empty %}
-            <p>No categories available.</p>
-            {% endfor %}
         </div>
     </section>
-
-    <footer>
-        <p>&copy; 2024 Categories. All rights reserved.</p>
-    </footer>
 </body>
 
 </html>

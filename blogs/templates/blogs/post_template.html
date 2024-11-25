@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Posts</title>
+    <title>Recent Posts</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
     <style>
@@ -16,110 +16,88 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             line-height: 1.6;
-            background-color: #f4f4f4;
+            background-color: #f9f9f9;
             color: #333;
         }
 
-        header {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 20px;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 2rem;
-        }
-
         .posts {
-            margin: 20px;
-        }
-
-        .container {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
         }
 
         .post {
-            background-color: #fff;
-            border: 1px solid #ddd;
+            padding: 15px 20px;
+            background: #fff;
             border-radius: 8px;
-            padding: 20px;
+            margin-bottom: 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .post-header {
             display: flex;
             justify-content: space-between;
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 15px;
+            align-items: center;
+            margin-bottom: 10px;
         }
 
         .date {
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        .badge {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            color: #fff;
             font-weight: bold;
         }
 
-        .category {
-            background-color: #007bff;
-            color: #fff;
-            padding: 5px 10px;
-            border-radius: 5px;
+        .badge.hot {
+            background-color: #ff5722;
         }
 
-        h2 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-        }
-
-        p {
-            font-size: 1rem;
-            color: #555;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
+        .badge.trending {
             background-color: #333;
-            color: #fff;
-            font-size: 0.9rem;
+        }
+
+        .post-title h1 {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .post h2 {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
         }
     </style>
 </head>
 
 <body>
-    <header>
-        <h1>Recent Posts</h1>
-    </header>
-
     <section class="posts">
-        <div class="container">
-            {% if posts %}
-                <h2>{{ posts.title }}</h2>
-
-                {% for post in posts %}
-                <div class="post">
-                    <div class="post-header">
-                        <span class="date">{{ post.date|date:"d F Y" }}</span>
-                        <span class="category">{{ post.status }}</span>
-                    </div>
-                    
-                    <p>{{ post.description }}</p>
-                </div>
-                {% endfor %}
-            {% else %}
-                <p>No posts available.</p>
-            {% endif %}
+        {% if posts %}
+        <h1>Recent Posts</h1>
+        <p>post those are very recent in Dot</p>
+        <h1>{{ posts.header }}</h1>
+        {% for post in posts %}
+        <div class="post">
+            <div class="post-header">
+                <h2>{{ forloop.counter }}. {{ post.description }}</h2>
+                <span class="badge {{ post.status|lower }}">{{ post.status }}</span>
+            </div>
+            <span class="date">{{ post.date|date:"d F" }}</span>
         </div>
+        {% endfor %}
+        {% else %}
+        <p>No posts available.</p>
+        {% endif %}
     </section>
-
-    <footer>
-        <p>&copy; 2024 Posts. All rights reserved.</p>
-    </footer>
 </body>
 
 </html>

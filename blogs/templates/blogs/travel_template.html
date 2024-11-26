@@ -10,45 +10,22 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <!-- Link to Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
-    <style>
-        /* Base Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
 
+    <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             color: #333;
         }
 
-        /* Container to center the content and limit the width */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
         .travel-posts {
-            flex: 1 1 calc(50% - 20px);
-            background-color: white;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             padding: 20px;
         }
 
-        /* Travel Posts Styling */
-        .travel-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
         .post {
-            flex: 1 1 calc(33.333% - 20px); /* 3 cards per row */
+            flex: 1 1 calc(33.333% - 20px);
             background-color: white;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -61,9 +38,7 @@
             object-fit: cover;
         }
 
-        .post-content {
-            padding: 20px;
-        }
+
 
         .post-content h2 {
             font-size: 1.8rem;
@@ -92,31 +67,34 @@
         .read-more:hover {
             background-color: #4cae4c;
         }
+        
+        .card-container{
+            gap: 8px;
+            display: flex;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <div class="row">
-            <!-- Travel Posts Section -->
-            <section class="travel-posts">
-                <h2>Travel Posts</h2>
-                <div class="travel-row">
-                    {% for travel in travels %}
-                    <div class="post">
-                        <img src="{{ travel.image_url.url }}" alt="{{ travel.title }}">
-                        <div class="post-content">
-                            <h2>{{ travel.title }}</h2>
-                            <p>{{ travel.description }}</p>
-                            <a href="{{ travel.read_more_link }}" class="read-more">Read More</a>
-                        </div>
+        <!-- Travel Posts Section -->
+        <section class="travel-posts">
+            <h2>Travel Posts</h2>
+            <div class="card-container">
+                {% for travel in travels %}
+                <div class="post">
+                    <img src="{{ travel.image_url.url }}" alt="{{ travel.title }}">
+                    <div class="post-content">
+                        <h2>{{ travel.title }}</h2>
+                        <p>{{ travel.description }}</p>
+                        <a href="{{ travel.read_more_link }}" class="read-more">Read More</a>
                     </div>
-                    {% empty %}
-                    <p>No travel posts available.</p>
-                    {% endfor %}
                 </div>
-            </section>
-        </div>
+                {% empty %}
+                <p>No travel posts available.</p>
+                {% endfor %}
+            </div>
+        </section>
     </div>
 </body>
 

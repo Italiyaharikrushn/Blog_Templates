@@ -7,36 +7,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biography</title>
 
-    <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Reset default styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* Body styling */
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
         }
 
-        /* Biography section */
-        .biography {
-            padding: 40px 0;
-            background-color: #f4f4f4;
-        }
-
-        /* Profile card styling */
         .profile {
             background-color: #2c2c2c;
-            color: #fff;
             border-radius: 10px;
             text-align: center;
             padding: 30px 20px;
-            margin: 20px;
+            margin: 25px 0;
             width: 300px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease;
@@ -68,7 +56,6 @@
             line-height: 1.4;
         }
 
-        /* Social links styling */
         .social-links {
             list-style: none;
             padding: 0;
@@ -96,7 +83,7 @@
         }
 
         .social-links a:hover {
-            background-color: #634f3d;
+            background-color: #97667f;
             transform: scale(1.1);
         }
     </style>
@@ -104,51 +91,45 @@
 
 <body>
     <section class="biography">
-        <div class="container">
-            {% for bio in biographies %}
-            <div class="profile">
-                <!-- Display Profile Image -->
-                <img src="{{ bio.profile_img.url }}" alt="{{ bio.name }}'s Profile Picture">
-                <!-- Display Name -->
-                <h2>{{ bio.name }}</h2>
-                <!-- Display Biography Text -->
-                <p>{{ bio.bio }}</p>
-                <!-- Social Media Links -->
-                <ul class="social-links">
-                    {% if bio.facebook_link %}
-                    <li>
-                        <a href="{{ bio.facebook_link }}" target="_blank" aria-label="Facebook">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                    </li>
-                    {% endif %}
-                    {% if bio.twitter_link %}
-                    <li>
-                        <a href="{{ bio.twitter_link }}" target="_blank" aria-label="Twitter">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                    </li>
-                    {% endif %}
-                    {% if bio.google_link %}
-                    <li>
-                        <a href="{{ bio.google_link }}" target="_blank" aria-label="Google+">
-                            <i class="fab fa-google-plus-g"></i>
-                        </a>
-                    </li>
-                    {% endif %}
-                    {% if bio.linkedin_link %}
-                    <li>
-                        <a href="{{ bio.linkedin_link }}" target="_blank" aria-label="LinkedIn">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                    </li>
-                    {% endif %}
-                </ul>
-            </div>
-            {% empty %}
-            <p>No biography information available.</p>
-            {% endfor %}
+        {% for bio in biographies %}
+        <div class="profile">
+            <img src="{{ bio.profile_img.url }}" alt="{{ bio.name }}'s Profile Picture">
+            <h2>{{ bio.name }}</h2>
+            <p>{{ bio.bio }}</p>
+            <ul class="social-links">
+                {% if bio.facebook_link %}
+                <li>
+                    <a href="{{ bio.facebook_link }}" target="_blank" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                </li>
+                {% endif %}
+                {% if bio.twitter_link %}
+                <li>
+                    <a href="{{ bio.twitter_link }}" target="_blank" aria-label="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </li>
+                {% endif %}
+                {% if bio.google_link %}
+                <li>
+                    <a href="{{ bio.google_link }}" target="_blank" aria-label="Google+">
+                        <i class="fab fa-google-plus-g"></i>
+                    </a>
+                </li>
+                {% endif %}
+                {% if bio.linkedin_link %}
+                <li>
+                    <a href="{{ bio.linkedin_link }}" target="_blank" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
         </div>
+        {% empty %}
+        <p>No biography information available.</p>
+        {% endfor %}
     </section>
 </body>
 

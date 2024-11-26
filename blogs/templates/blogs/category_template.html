@@ -14,16 +14,13 @@
             box-sizing: border-box;
         }
 
-        /* General Body Styles */
         body {
             font-family: Arial, sans-serif;
             background-color: #fff;
             color: #333;
         }
 
-        /* Section: Categories */
         .categories {
-            padding: 40px 0;
             text-align: center;
         }
 
@@ -40,14 +37,11 @@
             margin-bottom: 20px;
         }
 
-        /* Container for Centering */
         .category-container {
             display: flex;
             justify-content: center;
-            margin-top: 40px;
         }
 
-        /* Category Card Styles */
         .category-card {
             background-color: #f9f9f9;
             border: 1px solid #ddd;
@@ -64,13 +58,10 @@
             margin-bottom: 15px;
         }
 
-        /* Category List */
         .category-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            text-align: justify;
-            
+            display: grid;
+            grid-template-columns: auto auto;
+            text-align: justify;            
         }
 
         .category-item {
@@ -102,7 +93,6 @@
         <p>Browse all your favorite categories</p>
         <div class="category-container">
             <div class="category-card">
-                <h3>Categories</h3>
                 <div class="category-list">
                     {% for category in categories %}
                     <div class="category-item">

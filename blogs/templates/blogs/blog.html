@@ -7,14 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog</title>
 
-    <!-- Link to custom CSS file -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-    <!-- Link to Bootstrap CSS for styling -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <!-- Inline CSS for custom styling -->
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -22,43 +19,20 @@
             padding: 0;
         }
 
-        header,
-        footer {
-            position: fixed;
+        header {
+            top: 0;
             left: 0;
             width: 100%;
+            padding: 15px;
+            text-align: center;
             background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             z-index: 1;
         }
 
-        header {
-            top: 0;
-            padding: 15px;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        footer {
-            bottom: 0;
-            padding: 15px;
-            text-align: center;
-            background-color: #f8f9fa;
-        }
-
-        /* Blog Section */
         .blog-section {
             margin-top: 80px;
-            padding: 0 15px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .blog-section .row {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
+            padding: 15px;
         }
 
         .blog-section .card {
@@ -67,6 +41,7 @@
             border: none;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 18vh;
             overflow: hidden;
             transition: all 0.3s ease;
             background-color: #fff;
@@ -91,57 +66,38 @@
             transform: scale(1.1);
         }
 
-        .blog-section .card-body {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
         .blog-section .card-title {
             font-size: 1.25rem;
             font-weight: 600;
             color: #343a40;
-            margin-bottom: 15px;
             text-transform: uppercase;
+            margin-bottom: 15px;
         }
 
         .blog-section .card-text {
             font-size: 0.875rem;
-            line-height: 1.5;
             color: #6c757d;
             margin-bottom: 20px;
         }
 
-        .blog-section .card-text small {
-            color: #adb5bd;
-        }
-
-        /* Category label */
         .blog-section .card-body .category {
             font-size: 14px;
             color: #007bff;
-            margin-bottom: 10px;
             text-transform: uppercase;
+            margin-bottom: 10px;
         }
 
-        /* Background overlay for image view */
         .background-overlay {
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
             width: 100%;
-            height: 100%;
+            height: 80%;
             display: none;
             justify-content: center;
             align-items: center;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-color: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.7) no-repeat center/cover;
             z-index: -1;
-            filter: grayscale(100%);
         }
 
         .background-overlay.active {
@@ -152,71 +108,24 @@
             font-size: 2rem;
             color: #fff;
             text-align: center;
-            font-weight: bold;
             margin-top: 20px;
         }
 
-        /* Main Section styling */
-        .main-section .row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .main-section .col-6 {
-            flex: 1;
-        }
-
-        /* Post content styling */
-        .post-content {
-            padding: 10px;
-        }
-
-        .post-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-
-        .post-header span {
-            font-size: 12px;
-            color: #888;
-        }
-
-        .post h2 {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-
-        .post p {
-            line-height: 1.6;
-            margin-bottom: 10px;
-        }
-
-        .read-more {
-            display: inline-block;
-            padding: 5px 10px;
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-            text-decoration: none;
-            color: #333;
-        }
     </style>
 </head>
 
 <body>
-    <!-- Header Section -->
+    <!-- Header -->
     <header>
         <h1>Blog Entries</h1>
     </header>
 
-    <!-- Blog Section -->
+    <!-- Main Section -->
     <section class="blog-section">
         <div class="container">
-            <div class="row">
-                <!-- Loop through blogs and display each one -->
+            <div class="card-container">
                 {% for blog in blogs %}
-                <div class="col-md-4">
+                <div class="col-3">
                     <div class="card" onclick="showOverlay('{{ blog.image_url.url }}', '{{ blog.title }}')">
                         <img src="{{ blog.image_url.url }}" class="card-img-top" alt="{{ blog.title }}">
                         <div class="card-body">
@@ -233,45 +142,65 @@
         </div>
     </section>
 
-    <!-- Background Overlay for Image View -->
     <div class="background-overlay" id="backgroundOverlay">
         <div class="overlay-title" id="overlayTitle"></div>
     </div>
 
-    <!-- Include additional templates -->
-    <section class="main-section">
+    <section>
         <div class="container">
             <div class="row">
-                <div class="col-6">
-                    {% include './travel_template.html' %}
+                <div class="col-9">
+                    {% include 'blogs/travel_template.html' %}
                 </div>
-                <div class="col-6">
-                    {% include './biography_template.html' %}
+                <div class="col-3">
+                    {% include 'blogs/biography_template.html' %}
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer Section -->
-    <footer>
-        <p>© 2024 Copyright, All Rights Reserved</p>
-    </footer>
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-9">
+                    {% include 'blogs/myself_template.html' %}
+                </div>
+                <div class="col-3">
+                    {% include 'blogs/post_template.html' %}
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- JavaScript to handle overlay functionality -->
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-9">
+                    {% include 'blogs/post_page_template.html' %}
+                </div>
+                <div class="col-3">
+                    {% include 'blogs/advertisement_template.html' %}
+                    {% include 'blogs/category_template.html' %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- JavaScript -->
     <script>
+        window.onload = function () {
+            const defaultImageUrl = "path/to/default-image.jpg";
+            const defaultTitle = "Default Title";
+            showOverlay(defaultImageUrl, defaultTitle);
+        };
         function showOverlay(imageUrl, title) {
             const overlay = document.getElementById("backgroundOverlay");
             const overlayTitle = document.getElementById("overlayTitle");
-
-            // Set the background image and title in the overlay
             overlay.style.backgroundImage = `url(${imageUrl})`;
             overlayTitle.textContent = title;
-
-            // Show the overlay
             overlay.classList.add("active");
         }
 
-        // Close overlay when clicked
         document.getElementById("backgroundOverlay").addEventListener("click", function () {
             this.classList.remove("active");
         });
